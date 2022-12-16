@@ -13,6 +13,7 @@
     "bcp-47": "^2.1.0",
     "next": "latest",
     "next-sanity": "^3.1.3",
+    "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",

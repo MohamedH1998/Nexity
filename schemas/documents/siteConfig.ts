@@ -31,7 +31,8 @@ export default defineType({
             name: 'lang',
             type: 'string',
             validation: (Rule: any) =>
-              Rule.custom((lang: string) => (parse(lang) ? true : 'Please use a valid bcp47 code')),
+            Rule.required().custom((lang: string) => (parse(lang) ? true : 'Please use a valid bcp47 code')),
+            
           }),
           defineField({
             name: 'logo',

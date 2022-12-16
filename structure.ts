@@ -7,7 +7,7 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
     { schemaType}
 ) => {
   // add relevant schema type you want to preview
-    if (schemaType === '###') {
+    if (schemaType === 'page') {
         return S.document().views([
             S.view.form(),
         
