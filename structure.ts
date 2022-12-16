@@ -6,7 +6,8 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
     S,
     { schemaType}
 ) => {
-    if (schemaType === 'post') {
+  // add relevant schema type you want to preview
+    if (schemaType === '###') {
         return S.document().views([
             S.view.form(),
         
@@ -25,6 +26,19 @@ export const getDefaultDocumentNode: DefaultDocumentNodeResolver = (
     attributes: {}
   })
   .title('Preview')
-]) ;
+]);
     }
 }
+
+export const deskStructure = (S: any) => S.list().title('Content').items([
+  S.listItem()
+    .title('Site config')
+    .child(
+      S.editor()
+        .id('site-config')
+        .schemaType('site-config')
+        .documentId('site-config')
+    ),
+  ...S.documentTypeListItems().filter((listItem: any) => !['site-config'].includes(listItem.getId()))
+])
+  

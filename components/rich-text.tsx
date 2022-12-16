@@ -7,7 +7,7 @@ export const RichText = {
         image: ({ value }: any) => {
             return (
                 <div className="relative w-full h-96 m-10 mx-auto">
-                    <Image className="object-contain" src={urlFor(value).url()} alt="Blog Post Image" fill/>
+                    <Image className="object-contain" src={urlFor(value).url()} alt="related" fill/>
                 </div>
             )
         }
@@ -33,15 +33,20 @@ export const RichText = {
         h4: ({ children }: any) => (
             <h4 className="text-2xl py-10 font-bold">{children}</h4>
         ),
+        normal: ({ children }: any) => (
+            <p className="pb-3">{children}</p>
+        ),
         blockquote: ({ children }: any) => (
-            <blockquote className="border-l-[#F7AB0A] border-l-5 pl-5 py-5 my-5">{children}</blockquote>
+            <blockquote className="py-4 pl-5 my-4 bg-gray-50 border-l-4 border-primary">
+                <p className="italic font-medium leading-relaxed">{children}</p>
+            </blockquote>
         ),
     },
     marks: {
         link: ({ children, value}: any) => {
             const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined
             return (
-                <Link href={value.href} rel={rel} className="underline decoration-[#F7AB0A] hover:decoration-black">{children}</Link>
+                <Link href={value.href} rel={rel} className="underline decoration-primary hover:decoration-black">{children}</Link>
             )
         }
     }
