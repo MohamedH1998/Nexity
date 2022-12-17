@@ -9,6 +9,15 @@ type Base = {
     _updatedAt: string;
 }
 
+
+interface Cta {
+    _key: string,
+    _type: string,
+    route: object,
+    title: string;
+    route?: any
+  }
+
 interface Post extends Base {
     author: Author;
     body: Block[];

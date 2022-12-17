@@ -25,7 +25,7 @@ export default defineType({
             title: 'Page sections',
             of: [
                 defineArrayMember({type: 'hero'}),
-                defineArrayMember({type: 'textSection'})
+                defineArrayMember({type: 'simpleText'})
             ]
         }),
         defineField({

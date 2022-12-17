@@ -7,7 +7,7 @@ import externalLink from './objects/externalLink'
 import figure from './objects/figure'
 import hero from './objects/hero'
 import internalLink from './objects/internalLink'
-import textSection from './objects/textSection'
+import simpleText from './objects/simpleText'
 
 export const schemaTypes = [
     blockText,
@@ -18,6 +18,6 @@ export const schemaTypes = [
     route,
     figure,
     hero,
-    textSection,
+    simpleText,
     siteConfig
 ]

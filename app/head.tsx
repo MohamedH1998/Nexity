@@ -1,4 +1,7 @@
+import '../styles/globals.css'
+
 export default async function Head() {
+
   return (
     <>
       <title></title>

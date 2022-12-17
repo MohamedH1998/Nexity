@@ -5,6 +5,12 @@ import PreviewSuspense from '../../../components/preview-suspense'
 import groq from 'groq'
 import { client } from '../../../lib/sanity.client'
 import { slugParamToPath, getSlugVariations } from '../../../utils/urls'
+import imageUrlBuilder from '@sanity/image-url'
+import { NextSeo } from 'next-seo'
+import SEO from '../../../components/next-seo'
+import RenderSections from '../../../containers/render-sections'
+import Hero from '../../../components/sections/hero'
+
 
 
 type Props = {
@@ -86,15 +92,45 @@ async function getEnrichedData(slug: string) {
 }
 }
 
+const builder = imageUrlBuilder(client)
+
+
 async function HomePage({params}: Props) {
     const currentSlug = slugParamToPath(params?.slug)
     const data = await getEnrichedData(currentSlug);
-  console.log(data)
+
     if (data?.page._type !== 'page') {
       return notFound()
     }
     
     const { title = 'Missing title', description, openGraphImage, content, slug} = data.page;
+    const {url } = data.siteConfig
+
+    const openGraphImages = openGraphImage
+    ? [
+        {
+          url: builder.image(openGraphImage).width(800).height(600).url(),
+          width: 800,
+          height: 600,
+          alt: title,
+        },
+        {
+          // Facebook recommended size
+          url: builder.image(openGraphImage).width(1200).height(630).url(),
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+        {
+          // Square 1:1
+          url: builder.image(openGraphImage).width(600).height(600).url(),
+          width: 600,
+          height: 600,
+          alt: title,
+        },
+      ]
+    : []
+
 
 if (previewData()) {
   return (<PreviewSuspense fallback={(
@@ -102,12 +138,22 @@ if (previewData()) {
       <p className="text-center text-lg animate-pulse text-blue-500">Loading Preview Data...</p>
     </div>
   )}>
-    <h1 className="text-7xl font-bold underline">Welcome to Nexity - you're in preview</h1>
+    {content && <RenderSections sections={data.page.content}/>}
+
   </PreviewSuspense>)
 }
   return (
-    <h1 className="text-7xl font-bold underline">Welcome to Nexity</h1>
-
+    <div className="min-h-screen bg-pale-grey w-full h-full">
+    <SEO
+    title={title}
+    description={description}
+    canonical={url && `${url}/${currentSlug}`}
+    openGraphImages={openGraphImages}
+    />
+    {/* <h1 className="text-7xl font-bold underline">Welcome tko Nexity</h1> */}
+    {/* <Hero/> */}
+    {content && <RenderSections sections={data.page.content}/>}
+    </div>
   )
 }
 

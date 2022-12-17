@@ -1,7 +1,7 @@
 import { defineField, defineType, PreviewConfig } from "sanity"
 
 export default defineType({
-    name: 'textSection',
+    name: 'simpleText',
     title: 'Text',
     type: 'object',
     fields: [
@@ -27,7 +27,7 @@ export default defineType({
         prepare({heading}: {heading: PreviewConfig<{ heading: string; }, Record<"heading", any>>}) {
             return {
                 title: `${heading}`,
-                subtitle: 'Text section'
+                subtitle: 'Simple text section'
             }
         }
     }
